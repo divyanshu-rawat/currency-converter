@@ -1,0 +1,64 @@
+
+
+<!doctype html>
+
+<html lang="en">
+	<head>
+		 <meta charset="UTF-8">
+		 <title>Currency Converter</title>
+		 <meta name="description" content="currency converter which converts values between Euro, US Dollar and Japanese Yen.">
+		 <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+		 <meta name="author" content="Divyanshu Rawat">
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		 <link rel="stylesheet" href="css/styles.css">
+	</head>
+
+	<body>
+		<h2>Currency Converter</h2>
+		<p>Type In Amount And Select Currency:</p>
+
+		<input type="text" id="Input_Value" onchange = ""/>
+
+	    <select id="Input_Currency" onchange="">
+	        <option value="YEN">YEN</option>
+	        <option value="USD">USD</option>
+	        <option value="EUR">EUR</option>
+	    </select>
+
+	    <p>Converted amount:</p>
+	    <input type="text" id="Output_Value" value="0.00" disabled/>
+
+	    <select id="Output_Currency" onchange="">
+	        <option value="YEN">YEN</option>
+	        <option value="USD">USD</option>
+	        <option value="EUR">EUR</option>
+	    </select>
+
+		<script>
+			function loadScript(url, callback){
+
+			    var script = document.createElement("script")
+			    script.type = "text/javascript";
+
+			    if (script.readyState){  // For IE
+			        script.onreadystatechange = function(){
+			            if (script.readyState == "loaded" ||
+			                    script.readyState == "complete"){
+			                script.onreadystatechange = null;
+			                callback();
+			            }
+			        };
+			    }else {  // For Other Browsers.
+			        script.onload = function(){
+			            callback();
+			        };
+			    }
+			    script.src = url;
+			    document.getElementsByTagName("head")[0].appendChild(script);
+			}
+		</script> 
+		<script type="text/javascript" src="js/fetch_currency.js"></script>
+	</body>
+</html>
+
+
