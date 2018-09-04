@@ -17,9 +17,9 @@
 		<h2>Currency Converter</h2>
 		<p>Type In Amount And Select Currency:</p>
 
-		<input type="text" id="Input_Value" onchange = ""/>
+		<input type="text" id="Input_Value" oninput = "calculate_currency_value(this.value)" value="0.00" disabled/>
 
-	    <select id="Input_Currency" onchange="">
+	    <select id="Input_Currency" onchange="set_input_currency(this.value)" disabled>
 	        <option value="YEN">YEN</option>
 	        <option value="USD">USD</option>
 	        <option value="EUR">EUR</option>
@@ -28,7 +28,7 @@
 	    <p>Converted amount:</p>
 	    <input type="text" id="Output_Value" value="0.00" disabled/>
 
-	    <select id="Output_Currency" onchange="">
+	    <select id="Output_Currency" onchange="set_output_currency(this.value)" disabled>
 	        <option value="YEN">YEN</option>
 	        <option value="USD">USD</option>
 	        <option value="EUR">EUR</option>
@@ -57,7 +57,7 @@
 			    document.getElementsByTagName("head")[0].appendChild(script);
 			}
 		</script> 
-		<script type="text/javascript" src="js/fetch_currency.js"></script>
+		<script type="text/javascript" src="JavaScript/fetch_currency.js"></script>
 	</body>
 </html>
 
