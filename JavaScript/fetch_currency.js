@@ -8,16 +8,17 @@ loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
   // axios.get('http://data.fixer.io/api/latest?access_key=1a648cc69ff1561e5d6407585b107ea9')
   
  function call_fixer(){
-	  axios.get('http://data.fixer.io/api/latest?access_key=1a648cc69ff1561e5d6407585b107ea9')
-	  .then(function (response) {
+    
+      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-	  	// console.log(response)
+	  axios.
+	  get('http://data.fixer.io/api/latest?access_key=1a648cc69ff1561e5d6407585b107ea9')
+	  .then(function (response) {
 	  	json_response = response;
 	    switch_interface_on();
 	  })
 	  .catch(function (error) {
-	      console.log(error);
-	      switch_interface_on();
+	      switch_interface_off();
 	  });
  }
 
