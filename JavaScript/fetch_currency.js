@@ -52,22 +52,13 @@ function calculate_currency_value() {
 
 	if(json_response){
 
-		console.log('!!!!!',get.Input_currency_type.value,get.Output_currency_type.value)
-
 	    let Input_currency_rate   = json_response.data.rates[get.Input_currency_type.value];
 	    let Output_currency_rate  = json_response.data.rates[get.Output_currency_type.value];
 
-	    console.log(Input_currency_rate, Output_currency_rate);
-
 	    let Output_currency_value = (get.Input_currency_value.value * Output_currency_rate / (Input_currency_rate)).toFixed(2);
-
-	    console.log('calculation',Output_currency_value);
 	    document.getElementById("Output_Value").value = Output_currency_value;
 
 	}
-	
-
-
 }
 
 
