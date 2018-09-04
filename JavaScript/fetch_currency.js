@@ -9,6 +9,9 @@ loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
  function call_fixer(){
 
  	  // for CORS point of view.
+
+ 	  
+ 	  document.getElementById("data_loading").innerHTML = 'Loading....';
       axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 	  axios.
@@ -18,10 +21,12 @@ loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
 	  	if(response.data.error){
 	  		document.getElementById("err").innerHTML = response.data.error.info;
 	  		switch_interface_off();
+	  		document.getElementById("data_loading").innerHTML = '';
 	  	}
 	  	else{
 	  		json_response = response;
 	    	switch_interface_on();
+	    	document.getElementById("data_loading").innerHTML = '';
 	  	}
 	
 	  })
