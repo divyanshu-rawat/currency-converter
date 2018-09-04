@@ -1,97 +1,91 @@
 
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function() {}, false); // Can Also Be Used To Trigger AJAX.
 
-
-
-}, false); // Can Also Be Used To Trigger AJAX.
-
-
-// Global Variables.
-var baseCurrency         = ""
-var Input_Currency_Value = ""   , Output_Currency_Value  = "" ;
-var Input_Value          = null , Output_Value           = null;
-var Input_Select         = null , Output_Select          = null;
-
-var json_data = null;
+var json_response = null;
 
 loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
 
   // axios.get('http://data.fixer.io/api/latest?access_key=1a648cc69ff1561e5d6407585b107ea9')
   
  function call_fixer(){
-	  axios.get('https://jsonplaceholder.typicode.com/todos/1')
+	  axios.get('http://data.fixer.io/api/latest?access_key=1a648cc69ff1561e5d6407585b107ea9')
 	  .then(function (response) {
-	    
-	    json_data = response;
+
+	  	// console.log(response)
+	  	json_response = response;
 	    switch_interface_on();
 	  })
 	  .catch(function (error) {
-	      console.log(err);
+	      console.log(error);
 	      switch_interface_on();
 	  });
  }
 
- Initialize_Project(call_fixer);
-
-
-
-
+ call_fixer();
 
 });
 
-
-function Initialize_Project(callback) {
-
-	Input_Value = document.getElementById("Input_Value");
-	Output_Value = document.getElementById("Output_Value");
-	
-	Input_Select = document.getElementById("Input_Currency");
-	Output_Select = document.getElementById("Output_Currency");
-	
-	Input_Currency_Value = Input_Select.options[Input_Select.selectedIndex].value;
-	Output_Currency_Value = Output_Select.options[Output_Select.selectedIndex].value;
-	
-	// console.log('Output_Currency_Value',Output_Currency_Value);
-	// console.log('Input_Currency_Value',Input_Currency_Value);
-	// console.log('Output_Select',Output_Select);
-	// console.log('Input_Select',Input_Select);
-	// console.log('Output_Value',Output_Value);
-	// console.log('Input_Value',Input_Value);
-
-	callback();
-}
-
  // if fixer data is not retrieved, interface is off.
 function switch_interface_off() {
-    Input_Value.disabled   = true;
-    Input_Select.disabled  = true;
-    Output_Select.disabled = true;
+
+    let get = get_currency_type_value();
+
+    get.Input_currency_value.disabled   = true;
+    get.Input_currency_type.disabled    = true;
+    get.Output_currency_value.disabled  = true;
+    get.Output_currency_type.disabled   = true;
 }
 
 // if fixer data is retrieved, turning the interface  on.
 function switch_interface_on() {
-    Input_Value.disabled   = false;
-    Input_Select.disabled  = false;
-    Output_Select.disabled = false;
+
+	let get = get_currency_type_value();
+
+    get.Input_currency_value.disabled   = false;
+    get.Input_currency_type.disabled    = false;
+    get.Output_currency_value.disabled  = false;
+    get.Output_currency_type.disabled   = false;
 }
 
-function calculate_currency_value(value) {
-	console.log(json_data);
+function calculate_currency_value() {
+	let get  = get_currency_type_value();
+
+	if(json_response){
+
+		console.log('!!!!!',get.Input_currency_type.value,get.Output_currency_type.value)
+
+	    let Input_currency_rate   = json_response.data.rates[get.Input_currency_type.value];
+	    let Output_currency_rate  = json_response.data.rates[get.Output_currency_type.value];
+
+	    console.log(Input_currency_rate, Output_currency_rate);
+
+	    let Output_currency_value = (get.Input_currency_value.value * Output_currency_rate / (Input_currency_rate)).toFixed(2);
+
+	    console.log('calculation',Output_currency_value);
+	    document.getElementById("Output_Value").value = Output_currency_value;
+
+	}
+	
+
+
 }
 
 
-function set_input_currency(value){
-	Input_Value = value;
-	console.log('Input Value:',Input_Value);
-	calculate_currency_value();
+function get_currency_type_value(){
+
+	let Input_currency_type   = document.getElementById("Input_Currency");
+	let Output_currency_type  = document.getElementById("Output_Currency");
+	let Input_currency_value  = document.getElementById("Input_Value");
+	let Output_currency_value = document.getElementById("Output_Value");
+
+	return {
+		Input_currency_type   : Input_currency_type,
+		Output_currency_type  : Output_currency_type,
+		Input_currency_value  : Input_currency_value,
+		Output_currency_value : Output_currency_value
+	}
 }
 
-function set_output_currency(value){
-	Output_Value = value;
-	console.log('Output Value:',Output_Value);
-	calculate_currency_value();
-
-}
 
 
 

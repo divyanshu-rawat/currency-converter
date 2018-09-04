@@ -17,10 +17,10 @@
 		<h2>Currency Converter</h2>
 		<p>Type In Amount And Select Currency:</p>
 
-		<input type="text" id="Input_Value" oninput = "calculate_currency_value(this.value)" value="0.00" disabled/>
+		<input type="text" id="Input_Value" oninput = "calculate_currency_value()" value="0.00" disabled/>
 
-	    <select id="Input_Currency" onchange="set_input_currency(this.value)" disabled>
-	        <option value="YEN">YEN</option>
+	    <select id="Input_Currency" onchange="calculate_currency_value()" disabled>
+	        <option value="JPY">JPY</option>
 	        <option value="USD">USD</option>
 	        <option value="EUR">EUR</option>
 	    </select>
@@ -28,8 +28,8 @@
 	    <p>Converted amount:</p>
 	    <input type="text" id="Output_Value" value="0.00" disabled/>
 
-	    <select id="Output_Currency" onchange="set_output_currency(this.value)" disabled>
-	        <option value="YEN">YEN</option>
+	    <select id="Output_Currency" onchange="calculate_currency_value()" disabled>
+	        <option value="JPY">JPY</option>
 	        <option value="USD">USD</option>
 	        <option value="EUR">EUR</option>
 	    </select>
