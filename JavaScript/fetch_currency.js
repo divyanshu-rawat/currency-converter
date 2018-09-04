@@ -3,9 +3,12 @@ window.addEventListener("DOMContentLoaded", function() {}, false); // Can Also B
 
 var json_response = null;
 
+// api call to fixer when DOM content is loaded.
 loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
 
  function call_fixer(){
+
+ 	  // for CORS point of view.
       axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 	  axios.
@@ -20,7 +23,7 @@ loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
 	  		json_response = response;
 	    	switch_interface_on();
 	  	}
-	  	
+	
 	  })
 	  .catch(function (error) {
 	      switch_interface_off();
@@ -32,7 +35,7 @@ loadScript("https://unpkg.com/axios/dist/axios.min.js", function(){
 
 });
 
- // if fixer data is not retrieved, interface is off.
+ // if fixer data is not retrieved, turning interface off.
 function switch_interface_off() {
 
     let get = get_currency_type_value();
@@ -43,7 +46,7 @@ function switch_interface_off() {
     get.Output_currency_type.disabled   = true;
 }
 
-// if fixer data is retrieved, turning the interface  on.
+// if fixer data is retrieved, turning the interface on.
 function switch_interface_on() {
 
 	let get = get_currency_type_value();
@@ -54,6 +57,8 @@ function switch_interface_on() {
     get.Output_currency_type.disabled   = false;
 }
 
+
+// Used to convert currency.
 function calculate_currency_value() {
 	let get  = get_currency_type_value();
 
@@ -68,7 +73,7 @@ function calculate_currency_value() {
 	}
 }
 
-
+// Returns all the input field, dropdown current values as an JS Object.
 function get_currency_type_value(){
 
 	let Input_currency_type   = document.getElementById("Input_Currency");
